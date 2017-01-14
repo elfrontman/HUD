@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class HUD{
 
     private GameObject mainHUD;
-    private Button[] buttons;
     public enum stateHUD {Splash, Main, Settings, Winner, Loser};
+
 
     public GameObject objectHUD{
         get {
@@ -17,13 +17,13 @@ public class HUD{
 
     public HUD(){
         this.mainHUD = GameObject.Find("HUD");
-        this.buttons = this.mainHUD.GetComponents<Button>();
-
-        Debug.Log(buttons.Length);
+        this.bindEvents();
+        
     }
 
     public void manageHUD(stateHUD state) {
         this.hideHud();
+        
         switch (state) {
             case stateHUD.Splash:
                 this.mainHUD.transform.GetChild(0).gameObject.SetActive(true);
@@ -37,6 +37,7 @@ public class HUD{
             default:
                 break;
         }
+        bindEvents();
     }
 
 
@@ -56,10 +57,12 @@ public class HUD{
         this.manageHUD(state);
     }
 
-
-
-
-
+    void bindEvents() {
+        ButtonsHandler.attachHandler("btnIniciar", () => { manageHUD(stateHUD.Main); });
+        ButtonsHandler.attachHandler("btnConfiguracion", () => { manageHUD(stateHUD.Settings); });
+        ButtonsHandler.attachHandler("btnSalir", () => { manageHUD(stateHUD.Main); });
+        ButtonsHandler.attachHandler("btnCancelar", () => { manageHUD(stateHUD.Main); });
+    }
 
 
 }
