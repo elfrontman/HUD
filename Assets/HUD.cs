@@ -60,7 +60,7 @@ public class HUD{
     void bindEvents() {
         ButtonsHandler.attachHandler("btnIniciar", () => { manageHUD(stateHUD.Main); });
         ButtonsHandler.attachHandler("btnConfiguracion", () => { manageHUD(stateHUD.Settings); });
-        ButtonsHandler.attachHandler("btnSalir", () => { manageHUD(stateHUD.Main); });
+        ButtonsHandler.attachHandler("btnSalir", () => { Debug.Log("Salir"); Application.Quit(); });
         ButtonsHandler.attachHandler("btnCancelar", () => { manageHUD(stateHUD.Main); });
     }
 
